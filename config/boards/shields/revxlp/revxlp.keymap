@@ -124,10 +124,10 @@
 #else
         colemak_dhm_layer {
             bindings = <
-       &lt MED_L ESC      AS(Q)      AS(W)      AS(F)       AS(P)          AS(B)         AS(J)            AS(L)          AS(U)       AS(Y)      &kp COLON &kp BKSP
+       &kp ESC            AS(Q)      AS(W)      AS(F)       AS(P)          AS(B)         AS(J)            AS(L)          AS(U)       AS(Y)      &kp COLON &kp BKSP
        &kp TAB            AS(A)      AS(R)      AS(S)       AS(T)          AS(G)         AS(M)            AS(N)          AS(E)       AS(I)      AS(O)     &kp SLASH
-       &kp PLUS           AS(Z)      AS(X)      AS(C)       AS(D)          AS(V)         AS(K)            AS(H)          &kp LBRC    &kp RBRC   &kp LPAR  &kp RPAR
-                                          &lt NUM_L QUOT    &mt LCTRL EQUAL      &mt LSHFT SPACE      &mt RSHFT ENTER        &mt RCTRL DOT       &mt RALT COMMA
+       &lt MED_L PLUS     AS(Z)      AS(X)      AS(C)       AS(D)          AS(V)         AS(K)            AS(H)          &kp LBRC    &kp RBRC   &kp LPAR  &kp RPAR
+                                          &lt NUM_L DQT    &mt LCTRL EQUAL      &mt LSHFT SPACE      &mt RSHFT ENTER        &mt RCTRL DOT       &mt RALT COMMA
             >;
         };
 #endif
