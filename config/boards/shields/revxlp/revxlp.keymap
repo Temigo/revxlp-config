@@ -9,12 +9,25 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/backlight.h>
 
+#define AS(keycode) &as LS(keycode) keycode     // Autoshift Macro
+
 #define NAV_L 1
 #define NUM_L 2
 #define MED_L 3
 #define FUN_L 4
 
 / {
+    behaviors {
+        as: auto_shift {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping_term_ms = <135>;
+            quick_tap_ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
     tap_dances {
     	shifty: shift_caps_word {
 		compatible = "zmk,behavior-tap-dance";
@@ -111,7 +124,7 @@
 #else
         colemak_dhm_layer {
             bindings = <
-       &kp ESC      &kp Q      &kp W      &kp F       &kp P          &kp B         &kp J            &kp L          &kp U       &kp Y      &kp COLON &kp BKSP
+       &kp ESC      AS(Q)      &kp W      &kp F       &kp P          &kp B         &kp J            &kp L          &kp U       &kp Y      &kp COLON &kp BKSP
        &kp TAB      &kp A      &kp R      &kp S       &kp T          &kp G         &kp M            &kp N          &kp E       &kp I      &kp O     &kp SLASH
        &kp PLUS     &kp Z      &kp X      &kp C       &kp D          &kp V         &kp K            &kp H          &kp LBRC    &kp RBRC   &kp LPAR  &kp RPAR
                                           &lt NUM_L QUOT    &mt LCTRL EQUAL      &mt LSHFT SPACE      &mt RSHFT ENTER        &mt RCTRL DOT       &mt RALT COMMA
@@ -131,9 +144,9 @@
         num_layer {
             bindings = <
        &trans        &kp DLLR   &kp N7     &kp N8      &kp N9          &trans        &kp PIPE      &kp BSLH       &kp TILDE      &kp GRAVE    &kp SEMI  &kp DEL
-       &kp N0           &kp HASH   &kp N4     &kp N5      &kp N6          &kp AT        &kp LT        &kp LEFT       &kp UP         &kp RIGHT    &kp GT    &kp QUESTION
+       &kp N0        &kp HASH   &kp N4     &kp N5      &kp N6          &kp AT        &kp LT        &kp LEFT       &kp UP         &kp RIGHT    &kp GT    &kp QUESTION
        &kp STAR      &kp PRCNT  &kp N1     &kp N2      &kp N3          &kp CARET     &kp AMPS      &kp APOS       &kp DOWN       &kp MINUS    &kp LBKT  &kp RBKT
-                                          &trans   &trans          &trans        &trans        &trans &trans
+                                          &trans   &bt BT_SEL 0          &bt BT_SEL 1       &trans        &trans &trans
             >;
         };
 
