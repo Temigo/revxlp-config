@@ -11,20 +11,25 @@
 
 #define AS(keycode) &as LS(keycode) keycode     // Autoshift Macro
 
-#define NAV_L 1
+#define STENO_L 1
 #define NUM_L 2
 #define MED_L 3
-#define FUN_L 4
 
 / {
     behaviors {
         as: auto_shift {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping_term_ms = <150>;
+            tapping_term_ms = <170>;
             quick_tap_ms = <0>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
+        };
+        td0: tap_dance_0 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp ESC>, <&tog STENO_L>;
         };
     };
 
@@ -45,7 +50,7 @@
 #else
         colemak_dhm_layer {
             bindings = <
-       &kp ESC            AS(Q)      AS(W)      AS(F)       AS(P)          AS(B)         AS(J)            AS(L)          AS(U)       AS(Y)      &kp COLON &kp BKSP
+       &td0               AS(Q)      AS(W)      AS(F)       AS(P)          AS(B)         AS(J)            AS(L)          AS(U)       AS(Y)      &kp COLON &kp BKSP
        &kp TAB            AS(A)      AS(R)      AS(S)       AS(T)          AS(G)         AS(M)            AS(N)          AS(E)       AS(I)      AS(O)     &kp SLASH
        &lt MED_L PLUS     AS(Z)      AS(X)      AS(C)       AS(D)          AS(V)         AS(K)            AS(H)          &kp LBRC    &kp RBRC   &kp LPAR  &kp RPAR
                                           &lt NUM_L DQT    &mt LCTRL EQUAL      &mt LSHFT SPACE      &mt RSHFT ENTER        &mt RCTRL DOT       &mt RALT COMMA
@@ -53,20 +58,20 @@
         };
 #endif
 
-        nav_layer {
+        steno_layer {
             bindings = <
-       &none         &trans     &trans     &trans      &trans          &trans       &kp GRAVE        &kp TAB        &kp GRAVE   &kp BKSP   &kp DEL &none
-       &none         &sk LSHFT  &sk LALT   &sk LCTRL   &sk LGUI        &trans       &kp TAB          &kp LARW       &kp DARW    &kp UARW   &kp RARW &none
-       &none         &trans     &trans     &trans      &trans          &trans       &trans           &kp HOME       &kp PG_DN   &kp PG_UP  &kp END &none
-                                           &none  &trans          &trans       &kp RET          &trans &none
+       &trans        &kp S    &kp T     &kp P      &kp H          &kp STAR       &kp F        &kp P       &kp L   &kp T   &kp D &trans
+       &none         &kp S    &kp K     &kp W      &kp R          &kp STAR       &kp R        &kp B       &kp G   &kp S   &kp Z &none
+       &none         &none     &none    &none      &none          &none          &none        &none       &none   &none  &knone &none
+                                           &none  &kp A          &kp O       &kp E          &kp U &none
             >;
         };
 
         num_layer {
             bindings = <
-       &trans        &kp DLLR   &kp N7     &kp N8      &kp N9          &trans        &kp PIPE      &kp BSLH       &kp TILDE      &kp GRAVE    &kp SEMI  &kp DEL
-       &kp N0        &kp HASH   &kp N4     &kp N5      &kp N6          &kp AT        &kp LT        &kp LEFT       &kp UP         &kp RIGHT    &kp GT    &kp QUESTION
-       &kp STAR      &kp PRCNT  &kp N1     &kp N2      &kp N3          &kp CARET     &kp AMPS      &kp APOS       &kp DOWN       &kp MINUS    &kp LBKT  &kp RBKT
+       &trans        &kp DLLR   &kp N7     &kp N8      &kp N9          &trans        &kp PIPE2      &kp BSLH       &kp TILDE      &kp GRAVE       &kp SEMI  &kp DEL
+       &kp N0        &kp HASH   &kp N4     &kp N5      &kp N6          &kp AT        &kp LT        &kp LEFT       &kp UP         &kp RIGHT       &kp GT    &kp QUESTION
+       &kp STAR      &kp PRCNT  &kp N1     &kp N2      &kp N3          &kp CARET     &kp AMPS      &kp APOS       &kp DOWN       &ht MINUS UNDER &ht LBKT LT  &ht RBKT GT
                                           &trans   &trans          &trans       &trans        &trans &trans
             >;
         };
